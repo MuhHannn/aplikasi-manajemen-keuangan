@@ -41,51 +41,71 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <h1>Halaman Utama</h1>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5">
+      <h1 className="text-3xl font-bold mb-5">Halaman Utama</h1>
       <button
+        className="bg-blue-500 text-white px-4 py-2 rounded mb-5"
         onClick={() => {
           router.push("/add-data");
         }}
       >
         Add Data
       </button>
-      {showAllData === undefined && <p>Loading...</p>}
-      {showAllData === null && <p>Data Kosong</p>}
+      {showAllData === undefined && <p className="text-gray-700">Loading...</p>}
+      {showAllData === null && <p className="text-red-500">Data Kosong</p>}
       {showAllData && (
-        <div>
-          {showAllData.map((data, index) => {
-            return (
-              <div key={index} className="flex">
-                <p>
-                  {" "}
-                  {data.id} {data.keterangan} {data.income} {data.outcome}{" "}
-                  {data.tanggal}/{data.bulan}/{data.tahun}
-                </p>
-                <button
-                  onClick={() => {
-                    router.push(`/edit/${data.id}`);
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => {
-                    handleDelete(data.id);
-                  }}
-                >
-                  Hapus
-                </button>
-                <button
-                  onClick={() => {
-                    router.push(`/detail/${data.id}`);
-                  }}
-                >
-                  Detail
-                </button>
-              </div>
-            );
-          })}
+        <div className="w-full max-w-4xl">
+          <table className="min-w-full bg-white shadow-md rounded overflow-hidden">
+            <thead className="bg-gray-200">
+              <tr>
+                <th className="py-2 px-4 border-b">ID</th>
+                <th className="py-2 px-4 border-b">Keterangan</th>
+                <th className="py-2 px-4 border-b">Income</th>
+                <th className="py-2 px-4 border-b">Outcome</th>
+                <th className="py-2 px-4 border-b">Tanggal</th>
+                <th className="py-2 px-4 border-b">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {showAllData.map((data, index) => (
+                <tr key={index} className="border-b hover:bg-gray-100">
+                  <td className="py-2 px-4 text-center">{data.id}</td>
+                  <td className="py-2 px-4 text-center">{data.keterangan}</td>
+                  <td className="py-2 px-4 text-center">{data.income}</td>
+                  <td className="py-2 px-4 text-center">{data.outcome}</td>
+                  <td className="py-2 px-4 text-center">
+                    {data.tanggal}/{data.bulan}/{data.tahun}
+                  </td>
+                  <td className="py-2 px-4 text-center space-x-2">
+                    <button
+                      className="bg-yellow-500 text-white px-3 py-1 rounded"
+                      onClick={() => {
+                        router.push(`/edit/${data.id}`);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="bg-red-500 text-white px-3 py-1 rounded"
+                      onClick={() => {
+                        handleDelete(data.id);
+                      }}
+                    >
+                      Hapus
+                    </button>
+                    <button
+                      className="bg-green-500 text-white px-3 py-1 rounded"
+                      onClick={() => {
+                        router.push(`/detail/${data.id}`);
+                      }}
+                    >
+                      Detail
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

@@ -54,29 +54,79 @@ export default function Home() {
   };
 
   return (
-    <div>
-      {dataDetail === undefined && <p>Loading...</p>}
-      {dataDetail === null && <p>Data Kosong</p>}
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5">
+      {dataDetail === undefined && <p className="text-gray-700">Loading...</p>}
+      {dataDetail === null && <p className="text-red-500">Data Kosong</p>}
       {dataDetail && (
-        <div>
-          <form onSubmit={handleSubmit}>
+        <div className="bg-white shadow-md rounded p-8 w-full max-w-lg">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
+              <label className="block text-gray-700">Keterangan:</label>
               <input
                 name="keterangan"
                 defaultValue={dataDetail.keterangan}
-              ></input>
-              <input name="income" defaultValue={dataDetail.income}></input>
-              <input name="outcome" defaultValue={dataDetail.outcome}></input>
-              <input name="tanggal" defaultValue={dataDetail.tanggal}></input>
-              <input name="bulan" defaultValue={dataDetail.bulan}></input>
-              <input name="tahun" defaultValue={dataDetail.tahun}></input>
+                className="w-full px-4 py-2 border rounded"
+                required
+              />
             </div>
             <div>
-              <button type="submit">Update Data</button>
+              <label className="block text-gray-700">Income:</label>
+              <input
+                name="income"
+                defaultValue={dataDetail.income}
+                className="w-full px-4 py-2 border rounded"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-gray-700">Outcome:</label>
+              <input
+                name="outcome"
+                defaultValue={dataDetail.outcome}
+                className="w-full px-4 py-2 border rounded"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-gray-700">Tanggal:</label>
+              <input
+                name="tanggal"
+                defaultValue={dataDetail.tanggal}
+                className="w-full px-4 py-2 border rounded"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-gray-700">Bulan:</label>
+              <input
+                name="bulan"
+                defaultValue={dataDetail.bulan}
+                className="w-full px-4 py-2 border rounded"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-gray-700">Tahun:</label>
+              <input
+                name="tahun"
+                defaultValue={dataDetail.tahun}
+                className="w-full px-4 py-2 border rounded"
+                required
+              />
+            </div>
+            <div className="flex space-x-4">
               <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+              >
+                Update Data
+              </button>
+              <button
+                type="button"
                 onClick={() => {
                   router.push(`/`);
                 }}
+                className="bg-gray-500 text-white px-4 py-2 rounded"
               >
                 Kembali
               </button>

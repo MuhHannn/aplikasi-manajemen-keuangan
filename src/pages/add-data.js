@@ -12,8 +12,6 @@ export default function Home() {
     const bulan = event.target.bulan.value;
     const tahun = event.target.tahun.value;
 
-    // console.log(keterangan, income);
-
     fetch("/api/insert-data", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -37,24 +35,74 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <p>Ini Halaman Add Data</p>
-      <div>
-        <form onSubmit={handleAdd}>
-          <label>Keterangan: </label>
-          <input name="keterangan" required></input>
-          <label>Income: </label>
-          <input name="income" required></input>
-          <label>Outcome: </label>
-          <input name="outcome" required></input>
-          <label>Tanggal: </label>
-          <input name="tanggal" required></input>
-          <label>Bulan: </label>
-          <input name="bulan" required></input>
-          <label>Tahun: </label>
-          <input name="tahun" required></input>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5">
+      <p className="text-3xl font-bold mb-5">Ini Halaman Add Data</p>
+      <div className="bg-white shadow-md rounded p-8 w-full max-w-lg">
+        <form onSubmit={handleAdd} className="space-y-4">
           <div>
-            <button type="submit">Add Data</button>
+            <label className="block text-gray-700">Keterangan:</label>
+            <input
+              name="keterangan"
+              required
+              className="w-full px-4 py-2 border rounded"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Income:</label>
+            <input
+              name="income"
+              required
+              className="w-full px-4 py-2 border rounded"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Outcome:</label>
+            <input
+              name="outcome"
+              required
+              className="w-full px-4 py-2 border rounded"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Tanggal:</label>
+            <input
+              name="tanggal"
+              required
+              className="w-full px-4 py-2 border rounded"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Bulan:</label>
+            <input
+              name="bulan"
+              required
+              className="w-full px-4 py-2 border rounded"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Tahun:</label>
+            <input
+              name="tahun"
+              required
+              className="w-full px-4 py-2 border rounded"
+            />
+          </div>
+          <div className="flex gap-1">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Add Data
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                router.push(`/`);
+              }}
+              className="bg-gray-500 text-white px-4 py-2 rounded"
+            >
+              Kembali
+            </button>
           </div>
         </form>
       </div>
