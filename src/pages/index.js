@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 export default function Home() {
   const router = useRouter();
   const [showAllData, setShowAllData] = useState();
+  const [showTotalIncome, setShowTotalIncome] = useState(0);
+  const [showTotalOutcome, setShowTotalOutcome] = useState(0);
+  const [showBalance, setShowBalance] = useState(0);
 
   useEffect(() => {
     fetch(`/api/get-all`)
@@ -13,6 +16,22 @@ export default function Home() {
         if (data.data) {
           console.log(data.data.length ? true : false);
           setShowAllData(data.data);
+
+          let dataTotalIncome = 0;
+          let dataTotalOutcome = 0;
+
+          for (let i = 0; i < data.data.length; i++) {
+            dataTotalIncome += data.data[i].income;
+          }
+
+          for (let i = 0; i < data.data.length; i++) {
+            dataTotalOutcome += data.data[i].outcome;
+          }
+
+          setShowTotalIncome(dataTotalIncome);
+          setShowTotalOutcome(dataTotalOutcome);
+          setShowBalance(dataTotalIncome - dataTotalOutcome);
+
           return;
         }
         setShowAllData(null);
@@ -37,6 +56,20 @@ export default function Home() {
       .then((res) => res.json())
       .then((data) => {
         setShowAllData(data.data);
+
+        let dataTotalIncome = 0;
+        let dataTotalOutcome = 0;
+
+        for (let i = 0; i < data.data.length; i++) {
+          dataTotalIncome += data.data[i].income;
+        }
+
+        for (let i = 0; i < data.data.length; i++) {
+          dataTotalOutcome += data.data[i].outcome;
+        }
+
+        setShowTotalOutcome(dataTotalOutcome);
+        setShowBalance(dataTotalIncome - dataTotalOutcome);
       });
   };
 
@@ -55,6 +88,11 @@ export default function Home() {
       {showAllData === null && <p className="text-red-500">Data Kosong</p>}
       {showAllData && (
         <div className="w-full max-w-4xl">
+          <div className="min-w-full bg-white shadow-md rounded overflow-hidden mb-5 flex flex-col items-center py-5">
+            <h4>Total income: {showTotalIncome}</h4>
+            <h4>Total outcome: {showTotalOutcome}</h4>
+            <h4>Balance: {showBalance}</h4>
+          </div>
           <table className="min-w-full bg-white shadow-md rounded overflow-hidden">
             <thead className="bg-gray-200">
               <tr>

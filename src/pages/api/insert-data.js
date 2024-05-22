@@ -11,6 +11,16 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Data harus valid" });
   }
 
+  if (income == 0 && outcome == 0) {
+    return res.status(400).json({ error: "Income atau Outcome harus diisi" });
+  }
+
+  if (income != 0 && outcome != 0) {
+    return res
+      .status(400)
+      .json({ error: "Income atau outcome hanya boleh diisi salah satu" });
+  }
+
   const resData =
     await sql`INSERT INTO aplikasi_keuangan (keterangan, income, outcome, tanggal, bulan, tahun)
   VALUES (${keterangan}, ${income}, ${outcome}, ${tanggal}, ${bulan}, ${tahun})`;
