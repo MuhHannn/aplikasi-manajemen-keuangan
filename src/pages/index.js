@@ -68,6 +68,7 @@ export default function Home() {
           dataTotalOutcome += data.data[i].outcome;
         }
 
+        setShowTotalIncome(dataTotalIncome);
         setShowTotalOutcome(dataTotalOutcome);
         setShowBalance(dataTotalIncome - dataTotalOutcome);
       });
@@ -75,7 +76,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-5">
-      <h1 className="text-3xl font-bold mb-5">Halaman Utama</h1>
+      <h1 className="text-3xl font-bold mb-5">Aplikasi Keuangan</h1>
       <button
         className="bg-blue-500 text-white px-4 py-2 rounded mb-5"
         onClick={() => {
